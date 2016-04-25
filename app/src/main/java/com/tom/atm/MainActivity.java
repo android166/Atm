@@ -13,7 +13,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         if (!logon){
             Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
+//            startActivity(intent);
+            startActivityForResult(intent, 6);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode==6){
+            if (resultCode == RESULT_OK){
+
+            }else{
+                finish();
+            }
         }
     }
 }
