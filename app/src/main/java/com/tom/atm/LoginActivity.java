@@ -17,7 +17,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         findViews();
-
+        String userid = getSharedPreferences("atm", MODE_PRIVATE)
+                .getString("PREF_USERID", "");
+        edUserid.setText(userid);
 
     }
 
@@ -30,6 +32,11 @@ public class LoginActivity extends AppCompatActivity {
         String userid = edUserid.getText().toString();
         String passwd = edPasswd.getText().toString();
         if (userid.equals("jack") && passwd.equals("1234")){
+            getSharedPreferences("atm", MODE_PRIVATE)
+                    .edit()
+                    .putString("PREF_USERID", userid)
+                    .commit();
+
             Toast.makeText(this, "登入成功", Toast.LENGTH_LONG).show();
             Intent intent = new Intent();
             intent.putExtra("USERID", userid);
