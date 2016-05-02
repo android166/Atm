@@ -15,6 +15,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText edUserid;
     private EditText edPasswd;
     private CheckBox cbUserid;
+    private boolean rememberUserid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,10 @@ public class LoginActivity extends AppCompatActivity {
                         .commit();
             }
         });
+        rememberUserid = getSharedPreferences("atm", MODE_PRIVATE)
+                .getBoolean("PREF_REMEMBER_USERID", false);
+        cbUserid.setChecked(rememberUserid);
+
     }
 
     private void findViews() {
@@ -48,11 +53,12 @@ public class LoginActivity extends AppCompatActivity {
         String userid = edUserid.getText().toString();
         String passwd = edPasswd.getText().toString();
         if (userid.equals("jack") && passwd.equals("1234")){
-            getSharedPreferences("atm", MODE_PRIVATE)
-                    .edit()
-                    .putString("PREF_USERID", userid)
-                    .commit();
-
+            if (rememberUserid) {
+                getSharedPreferences("atm", MODE_PRIVATE)
+                        .edit()
+                        .putString("PREF_USERID", userid)
+                        .commit();
+            }
             Toast.makeText(this, "登入成功", Toast.LENGTH_LONG).show();
             Intent intent = new Intent();
             intent.putExtra("USERID", userid);
