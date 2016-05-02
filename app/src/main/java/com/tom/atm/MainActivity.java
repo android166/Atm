@@ -13,14 +13,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        startActivity(new Intent(this, TestActivity.class));
-        /*
+//        startActivity(new Intent(this, TestActivity.class));
         if (!logon){
             Intent intent = new Intent(this, LoginActivity.class);
 //            startActivity(intent);
             startActivityForResult(intent, FUNC_LOGIN);
         }
-        */
 
     }
 

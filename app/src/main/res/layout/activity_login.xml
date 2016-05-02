@@ -46,6 +46,13 @@
             android:id="@+id/passwd" />
     </LinearLayout>
 
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="記住帳號?"
+        android:id="@+id/remember_userid"
+        android:checked="false" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
