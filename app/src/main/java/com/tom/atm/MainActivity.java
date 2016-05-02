@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
     private static final int FUNC_LOGIN = 6;
@@ -21,7 +23,11 @@ public class MainActivity extends AppCompatActivity {
 //            startActivity(intent);
             startActivityForResult(intent, FUNC_LOGIN);
         }
+        ListView list = (ListView) findViewById(R.id.list);
+        String[] data = {"AAA", "BBB","CCCCCC","DDDD", "EEE"};
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, data);
 
+        list.setAdapter(adapter);
     }
 
     @Override
