@@ -24,8 +24,9 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(intent, FUNC_LOGIN);
         }
         ListView list = (ListView) findViewById(R.id.list);
-        String[] data = {"AAA", "BBB","CCCCCC","DDDD", "EEE"};
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, data);
+        String[] func = {"餘額查詢", "交易明細", "最新消息","投資理財", "離開"};
+        ArrayAdapter adapter = new ArrayAdapter(this,
+                android.R.layout.simple_list_item_1, func);
 
         list.setAdapter(adapter);
     }
