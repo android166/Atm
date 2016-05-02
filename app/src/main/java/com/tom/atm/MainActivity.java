@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
     private static final int FUNC_LOGIN = 6;
@@ -33,6 +35,26 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+        switch (itemId){
+            case R.id.action_settings:
+                break;
+            case R.id.action_exit:
+                finish();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
 
