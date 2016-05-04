@@ -10,10 +10,11 @@ import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Spinner;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
     private static final int FUNC_LOGIN = 6;
     boolean logon = false;
 
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 android.R.layout.simple_list_item_1, func);
 
         list.setAdapter(adapter);
+//        list.setOnItemClickListener(this);
         //Spinner
         Spinner notify = (Spinner) findViewById(R.id.spinner);
         /*
@@ -46,7 +48,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 android.R.layout.simple_spinner_dropdown_item);
         notify.setAdapter(adapter2);
         notify.setOnItemSelectedListener(this);
-
+        // gridview
+        GridView grid = (GridView)findViewById(R.id.gridView);
+        grid.setAdapter(adapter);
+        grid.setOnItemClickListener(this);
     }
 
     @Override
@@ -91,6 +96,37 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view,
+                            int position, long id) {
+        switch(position){
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4: //離開
+                finish();
+                break;
+
+        }
+
+
+        /*
+        int viewId = parent.getId();
+        switch(viewId){
+            case R.id.list:
+                break;
+
+            case R.id.gridView:
+                break;
+        }
+        */
     }
 }
 
