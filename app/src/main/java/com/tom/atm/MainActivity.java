@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private static final int FUNC_LOGIN = 6;
     boolean logon = false;
 
@@ -39,8 +41,11 @@ public class MainActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, data);
                 */
         ArrayAdapter adapter2 = ArrayAdapter.createFromResource(this,
-                R.array.notify_array, android.R.layout.simple_list_item_1);
+                R.array.notify_array, android.R.layout.simple_spinner_item);
+        adapter2.setDropDownViewResource(
+                android.R.layout.simple_spinner_dropdown_item);
         notify.setAdapter(adapter2);
+        notify.setOnItemSelectedListener(this);
 
     }
 
@@ -75,6 +80,17 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String[] data = getResources().getStringArray(R.array.notify_array);
+        Log.d("SPIN", position+"/"+data[position]);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }
 
