@@ -7,17 +7,25 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Adapter;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, AdapterView.OnItemClickListener {
     private static final int FUNC_LOGIN = 6;
     boolean logon = false;
-
+    String[] func = {"餘額查詢", "交易明細", "最新消息","投資理財", "離開"};
+    int icons[] = {R.drawable.func_balance,
+        R.drawable.func_history,
+        R.drawable.func_news,
+        R.drawable.func_finance,
+        R.drawable.func_exit};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             startActivityForResult(intent, FUNC_LOGIN);
         }
         ListView list = (ListView) findViewById(R.id.list);
-        String[] func = {"餘額查詢", "交易明細", "最新消息","投資理財", "離開"};
         ArrayAdapter adapter = new ArrayAdapter(this,
                 android.R.layout.simple_list_item_1, func);
 
@@ -50,7 +57,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         notify.setOnItemSelectedListener(this);
         // gridview
         GridView grid = (GridView)findViewById(R.id.gridView);
-        grid.setAdapter(adapter);
+        IconAdapter iconAdapter = new IconAdapter();
+        grid.setAdapter(iconAdapter);
         grid.setOnItemClickListener(this);
     }
 
@@ -127,6 +135,38 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 break;
         }
         */
+    }
+    class IconAdapter extends BaseAdapter{
+
+        @Override
+        public int getCount() {
+            return icons.length;
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return func[position];
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position,
+                            View convertView, ViewGroup parent) {
+            View view = convertView;
+            if (view == null) {
+                view = getLayoutInflater().inflate(R.layout.icon, null);
+                TextView tv = (TextView) view.findViewById(R.id.icon_text);
+                ImageView iv = (ImageView) view.findViewById(R.id.icon_image);
+                tv.setText(func[position]);
+                iv.setImageResource(icons[position]);
+                convertView = view;
+            }
+            return convertView;
+        }
     }
 }
 
