@@ -108,17 +108,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view,
-                            int position, long id) {
-        switch(position){
-            case 0:
+                            int position, long itemId) {
+        switch((int)itemId){
+            case R.drawable.func_balance: //餘額查詢
                 break;
-            case 1:
+            case R.drawable.func_history: //交易明細
                 break;
-            case 2:
+            case R.drawable.func_news:
                 break;
-            case 3:
+            case R.drawable.func_finance:
                 break;
-            case 4: //離開
+            case R.drawable.func_exit:
                 finish();
                 break;
 
@@ -140,22 +140,27 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         @Override
         public int getCount() {
+            Log.d("ICON", "getCount");
             return icons.length;
         }
 
         @Override
         public Object getItem(int position) {
+            Log.d("ICON", "getItem");
             return func[position];
         }
 
         @Override
         public long getItemId(int position) {
-            return position;
+            Log.d("ICON", "getItemId");
+//            return position;
+            return icons[position];
         }
 
         @Override
         public View getView(int position,
                             View convertView, ViewGroup parent) {
+            Log.d("ICON", "getView");
             View view = convertView;
             if (view == null) {
                 view = getLayoutInflater().inflate(R.layout.icon, null);
