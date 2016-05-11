@@ -41,13 +41,13 @@ public class FinanceActivity extends AppCompatActivity {
     private void setupListView() {
         Cursor c = helper.getReadableDatabase().query("exp",
                 null, null, null, null, null, null);
-        String[] from = {"info", "amount"};
-        int[] to = {android.R.id.text1, android.R.id.text2};
+        String[] from = {"_id", "cdate", "info", "amount"};
+        int[] to = {R.id.item_id, R.id.item_cdate, R.id.item_info, R.id.item_amount};
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
-                android.R.layout.simple_list_item_2,
+                R.layout.finance_row,
                 c,
                 from,
-                to);
+                to, 0);
         list.setAdapter(adapter);
     }
 
