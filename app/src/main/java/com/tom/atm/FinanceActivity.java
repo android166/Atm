@@ -1,7 +1,9 @@
 package com.tom.atm;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 public class FinanceActivity extends AppCompatActivity {
 
@@ -20,7 +23,7 @@ public class FinanceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_finance);
-        helper = new MyDBHelper(this, "expense.db", null, 1);
+        helper = MyDBHelper.getInstance(this);
         list = (ListView) findViewById(R.id.list);
         setupListView();
 
@@ -47,7 +50,17 @@ public class FinanceActivity extends AppCompatActivity {
                 R.layout.finance_row,
                 c,
                 from,
-                to, 0);
+                to, 0){
+            @Override
+            public void bindView(View view, Context context, Cursor cursor) {
+                super.bindView(view, context, cursor);
+                int amount = cursor.getInt(cursor.getColumnIndex("amount"));
+                if (amount>50){
+                    TextView tv = (TextView) view.findViewById(R.id.item_amount);
+                    tv.setTextColor(Color.RED);
+                }
+            }
+        };
         list.setAdapter(adapter);
     }
 
