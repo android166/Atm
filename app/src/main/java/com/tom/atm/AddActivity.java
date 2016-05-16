@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Calendar;
+
 public class AddActivity extends AppCompatActivity {
 
     private EditText edDate;
@@ -20,6 +22,7 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
         findViews();
+        Calendar now = Calendar.getInstance();
         helper = MyDBHelper.getInstance(this);
     }
 
