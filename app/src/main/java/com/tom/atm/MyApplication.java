@@ -9,6 +9,6 @@ public class MyApplication extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
-        ExpenseDao.context = getApplicationContext();
+        ExpenseDao.initialize(getApplicationContext());
     }
 }

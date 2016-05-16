@@ -13,7 +13,11 @@ public class ExpenseDao {
     public static final String TABLE_NAME = "exp";
 
     public static Context context;
-    static MyDBHelper helper = MyDBHelper.getInstance(context);
+    static MyDBHelper helper;
+    public static void initialize(Context context){
+        helper = MyDBHelper.getInstance(context);
+        ExpenseDao.context = context;
+    }
     public static void insert(Expense expense) {
         helper.getWritableDatabase().insert(ExpenseDao.TABLE_NAME, null, expense.getContentValues());
     }

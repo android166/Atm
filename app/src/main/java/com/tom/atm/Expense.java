@@ -16,6 +16,8 @@ public class Expense {
     String info;
     int amount;
     public Expense(String d, String info, int amount) {
+        this.info = info;
+        this.amount = amount;
         try {
             date = sdf.parse(d);
         } catch (ParseException e) {
