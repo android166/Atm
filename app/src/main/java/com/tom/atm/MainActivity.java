@@ -113,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case R.drawable.func_balance: //餘額查詢
                 break;
             case R.drawable.func_history: //交易明細
+                startActivity(new Intent(this, TransActivity.class));
                 break;
             case R.drawable.func_news:
                 break;

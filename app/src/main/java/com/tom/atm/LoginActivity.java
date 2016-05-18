@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity {
                 URL url = new URL(params[0]);
                 InputStream is = url.openStream();
                 data = is.read();
-                Thread.sleep(2000);
+                Thread.sleep(1000);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
