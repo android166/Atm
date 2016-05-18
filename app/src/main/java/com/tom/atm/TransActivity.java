@@ -4,6 +4,8 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -15,6 +17,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TransActivity extends AppCompatActivity {
 
@@ -57,6 +61,8 @@ public class TransActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             try {
                 JSONArray array = new JSONArray(s);
+                ArrayList<HashMap<String, String>> data =
+                        new ArrayList<>();
                 for (int i=0; i<array.length(); i++){
                     JSONObject obj = array.getJSONObject(i);
                     String account = obj.getString("account");
@@ -64,7 +70,21 @@ public class TransActivity extends AppCompatActivity {
                     int amount = obj.getInt("amount");
                     int type = obj.getInt("type");
                     Log.d("OBJ", account+"/"+date+"/"+amount+"/"+type);
+                    HashMap<String, String> row = new HashMap<>();
+                    row.put("account", account);
+                    row.put("date", date);
+                    row.put("amount", amount+"");
+                    row.put("type", type+"");
+                    data.add(row);
                 }
+                ListView list = (ListView) findViewById(R.id.listView);
+                String[] from = {"account", "date", "amount", "type"};
+                int[] to = {R.id.row_account, R.id.row_date, R.id.row_amount, R.id.row_type};
+                SimpleAdapter adapter = new SimpleAdapter(TransActivity.this,
+                        data,
+                        R.layout.trans_row, from , to );
+                list.setAdapter(adapter);
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
